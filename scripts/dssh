@@ -1,0 +1,27 @@
+#!/bin/sh
+
+if [ -f /etc/dssh/dssh.opts ]
+then
+	. /etc/dssh/dssh.opts
+fi
+
+if [ -f ~/.dssh/dssh.opts ]
+then
+	. ~/.dssh/dssh.opts
+fi
+
+
+if [ -f ./dssh.opts ]
+then
+	. ./dssh.opts
+fi
+
+#DEBUG="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8888,suspend=y"
+
+# This is used in bsh scripts to determine, which machine we are on. Since java's hostname
+# methods do resolving, it takes much longer time, so using System.getenv("HOSTNAME") is fastest
+# way to determine this. HOSTNAME is usually not exported, but is contained in current shell
+export HOSTNAME
+export USER
+
+exec $JAVABIN $JAVAOPTS $KEYSTOREOPTS -jar $DSSHHOME/dist/dssh.jar "$@"

@@ -1,0 +1,8 @@
+doc
+extlib/*
+jniconsole/bin/*
+test
+trilead-ssh-patches
+dist/*
+classes/*
+*~

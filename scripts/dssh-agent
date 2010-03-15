@@ -1,0 +1,19 @@
+#!/bin/sh
+
+if [ -f /etc/dssh/dssh.opts ]
+then
+	. /etc/dssh/dssh.opts
+fi
+
+if [ -f ~/.dssh/dssh.opts ]
+then
+	. ~/.dssh/dssh.opts
+fi
+
+
+if [ -f ./dssh.opts ]
+then
+	. ./dssh.opts
+fi
+
+exec $JAVABIN $JAVAOPTS $KEYSTOREOPTS -cp $DSSHHOME/dist/dssh.jar dssh.agent.AgentMain $@
